@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: elastic
+  labels:
+    app: elastic
+  annotations:
+    openshift.io/display-name: "Elastic Cluster"
+    argocd.argoproj.io/sync-wave: "0"

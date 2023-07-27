@@ -1,0 +1,40 @@
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: kibana
+  labels:
+    app: kibana
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  port:
+    targetPort: http
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: kibana-sample-kb-http
+    weight: 100
+  wildcardPolicy: None
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: elastic
+  labels:
+    app: elastic
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  port:
+    targetPort: http
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: elasticsearch-sample-es-http
+    weight: 100
+  wildcardPolicy: None
